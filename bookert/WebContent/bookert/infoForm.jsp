@@ -70,5 +70,7 @@
 </table>
 <input type="submit" value="등록"> 
 </form>
+<hr>
+<a href="searchForm.jsp?name=">전체 목록</a>
 </body>
 </html>

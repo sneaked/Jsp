@@ -58,15 +58,26 @@ public class BookertDBBean {
 	}
 	
 	//책 제목 검색 기능
-	public List<BookinfoBean> bookSearch(String name){
+	public List<BookinfoBean> bookSearch(String name,String column,String sort){
 		List<BookinfoBean> result = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String sql = null;
 		
 		try{
 			conn = getConnection();
-			String sql = "select * from book_info where name like ?";
+			
+			
+			sql = "select * from book_info where name like ?";
+			if(column!=null){
+				sql += " order by ";
+				if(sort.equals("1")){
+					sql += column+" desc";
+				}else{
+					sql += column+" asc";
+				}
+			}
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%"+name+"%");
 			rs = pstmt.executeQuery();
@@ -84,7 +95,6 @@ public class BookertDBBean {
 					book.setPrice(rs.getInt("price"));
 					book.setPublication(rs.getString("publication"));
 					book.setReg_date(rs.getTimestamp("reg_date"));
-					
 					result.add(book);
 				}while(rs.next());
 			}

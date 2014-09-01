@@ -22,7 +22,7 @@
 %>
 <a href="managerForm.jsp">관리자 화면</a>
 <h1 align="center">재고관리</h1>
-<form action="searchForm.jsp" method="post">
+<form action="searchForm.jsp?page=stock" method="post">
 <table>
 	<tr>
 		<td>책 검색</td>
