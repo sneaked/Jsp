@@ -7,9 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="style/default.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
 <body>
 <a href="stockForm.jsp">돌아가기</a>

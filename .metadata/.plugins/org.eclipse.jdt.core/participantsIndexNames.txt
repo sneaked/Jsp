@@ -37,6 +37,8 @@ D:\jsp\jsp_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\16958
 \test\src
 D:\jsp\jsp_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1583307610.index
 \0801\src
+D:\jsp\jsp_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3528146024.index
+\bookert\src
 D:\jsp\jsp_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3180850861.index
 \test\src
 D:\jsp\jsp_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2246294046.index

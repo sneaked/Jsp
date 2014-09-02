@@ -3,8 +3,8 @@
 	<item value="568" key="DIALOG_WIDTH"/>
 	<item value="91" key="DIALOG_Y_ORIGIN"/>
 	<item value="2" key="org.eclipse.egit.ui.internal.clone.GitSelectWizardPageWizardSel"/>
-	<item value="540" key="DIALOG_HEIGHT"/>
 	<item value="448" key="DIALOG_X_ORIGIN"/>
+	<item value="540" key="DIALOG_HEIGHT"/>
 	<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
 	<item value="true" key="CommitDialog.showUntracked"/>
 	<list key="CommitDialog.authorValues">
@@ -18,18 +18,20 @@
 	</list>
 	<section name="GitImportWizard">
 	</section>
+	<section name="GitCommitMessageComponent">
+	</section>
 	<section name="org.eclipse.egit.ui.COMMIT_DIALOG_SECTION">
 		<item value="712" key="DIALOG_WIDTH"/>
 		<item value="25" key="DIALOG_Y_ORIGIN"/>
-		<item value="640" key="DIALOG_HEIGHT"/>
 		<item value="376" key="DIALOG_X_ORIGIN"/>
+		<item value="640" key="DIALOG_HEIGHT"/>
 		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.push.PushResultDialog.dialogBounds">
 		<item value="666" key="DIALOG_WIDTH"/>
 		<item value="147" key="DIALOG_Y_ORIGIN"/>
-		<item value="457" key="DIALOG_HEIGHT"/>
 		<item value="399" key="DIALOG_X_ORIGIN"/>
+		<item value="457" key="DIALOG_HEIGHT"/>
 		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
 	</section>
 </section>
