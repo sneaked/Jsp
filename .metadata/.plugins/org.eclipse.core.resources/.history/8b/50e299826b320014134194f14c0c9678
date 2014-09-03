@@ -1,0 +1,68 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="style/default.css">
+<title>로그인 창</title>
+<script type="text/javascript">
+function login(){
+	if(document.loginform.id.value=="")alert("아이디를 입력하세요");
+	else if(document.loginform.passwd.value=="")alert("비밀번호를 입력하세요");
+	else document.loginform.submit();
+}
+</script>
+</head>
+<body>
+<header id="testbox">
+
+</header>
+<nav id="testbox">
+
+</nav>
+<div id="loginbox">
+<%
+	if (session.getAttribute("loginId")==null) {
+	%>
+	<form method="post" action="loginPro.jsp" name="loginform">
+	<table align="center">
+	<tr>
+		<td>아이디 :</td><td> <input type="text" name="id" size="12" maxlength="50"></td>
+	</tr>
+	<tr>
+		<td>비밀번호 :</td><td><input type="password" name="passwd" size="13" maxlength="16"></td>
+	</tr>
+	<tr>
+		<td align="center"><a href="#" onclick="javascript:login()">로그인</a></td><td align="center"><a href="memberJoinForm.jsp">회원가입</a></td>
+	</tr>
+	</table>
+	</form>
+	<%
+	}else{
+		String loginId = (String)session.getAttribute("loginId");
+		
+	%>
+	<table align="center">
+		<tr>
+			<td><%=loginId%>님 접속중</td>
+		</tr>	
+	<%
+		if(loginId.equals("manager")){
+	%>
+		<tr>
+			<td><a href="managerForm.jsp">관리자 페이지로</a></td>
+		</tr>
+		<%}%>
+		<tr>
+			<td><a href="logoutPro.jsp">로그아웃</a></td>
+		</tr>
+	</table>
+	<%}%>
+</div>
+	
+</body>
+</html>

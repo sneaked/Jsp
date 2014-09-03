@@ -12,6 +12,7 @@ td {text-align: center;};
 </style>
 </head>
 <body>
+<a href="index.jsp?name=name&passwd=passwd">메인으로</a>
 <h1 align="center">관리자 페이지</h1>
 <table align="center" border="1" width="70%" height="600px">
 	<tr>

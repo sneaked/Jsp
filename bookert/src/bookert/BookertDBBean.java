@@ -116,7 +116,7 @@ public class BookertDBBean {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		int x = 0;
+		int x = 0;//아이디 불일치
 		try{
 			conn = getConnection();
 			sql = "select id,passwd from member where id=?";
@@ -125,10 +125,12 @@ public class BookertDBBean {
 			rs = pstmt.executeQuery();
 			if(rs.next()){
 				if(rs.getString("passwd").equals(passwd)){
-					x = 1;
+					x = 1;//로그인 성공
 					if(rs.getString("id").equals("manager1")||rs.getString("id").equals("manager2")){
-						x = 2;
+						x = 2;//관리자 로그인
 					}
+				}else{
+					x = -1;//비밀번호 불일치
 				}
 			}
 			
@@ -230,33 +232,50 @@ public class BookertDBBean {
 	}
 	
 	//책 입고 기능
-	public void bookStock(BookstockBean book){
+	public int bookStock(BookstockBean book){
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String sql = null;
+		int x = 0;
 		try{
 			conn = getConnection();
-			String sql = "select * from book_stock where book_num=?";
+			
+			sql = "select book_num,name from book_info where book_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, book.getBook_num());
 			rs = pstmt.executeQuery();
 			
+			int rsnum = rs.getInt("book_num");
+			String rsname = rs.getString("name");
+			
 			if(rs.next()){
-				sql = "update book_stock set ea=?,stock_date=? where book_num=?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, book.getEa()+rs.getInt("ea"));
-				pstmt.setTimestamp(2, book.getStock_date());
-				pstmt.setInt(3, rs.getInt("book_num"));
-				pstmt.executeUpdate();
-			}else{
-				sql = "insert into book_stock values (?,?,?,?)";
+			
+				sql = "select * from book_stock where book_num=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, book.getBook_num());
-				pstmt.setString(2, book.getName());
-				pstmt.setInt(3, book.getEa());
-				pstmt.setTimestamp(4, book.getStock_date());
-				pstmt.executeUpdate();
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					sql = "update book_stock set ea=?,stock_date=? where book_num=?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, book.getEa()+rs.getInt("ea"));
+					pstmt.setTimestamp(2, book.getStock_date());
+					pstmt.setInt(3, rs.getInt("book_num"));
+					pstmt.executeUpdate();
+				}else{
+					sql = "insert into book_stock values (?,?,?,?)";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, book.getBook_num());
+					pstmt.setString(2, book.getName());
+					pstmt.setInt(3, book.getEa());
+					pstmt.setTimestamp(4, book.getStock_date());
+					pstmt.executeUpdate();
+				}
+				x = 1;
+			}else{
+				x = -1;
 			}
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -268,6 +287,7 @@ public class BookertDBBean {
 			if(conn!=null)
 				try{conn.close();}catch(Exception e){}
 		}
+		return x;
 	}
 	//책 재고 검색기능
 	public List<BookstockBean> bookStockList(String column,String sort){

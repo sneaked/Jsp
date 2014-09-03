@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="style/default.css">
 <title>회원가입</title>
 <style>
 </style>
@@ -28,7 +29,7 @@ function idCheck(){
 	if(inputid==""){
 		alert("입력된 아이디가 없습니다");
 	}else{
-		window.open("checkIdPro.jsp?id="+inputid,"중복확인", "width=400 height=150");
+		window.open("checkIdPro.jsp?id="+inputid,"idchk", "width=400 height=150");
 	}
 	
 }

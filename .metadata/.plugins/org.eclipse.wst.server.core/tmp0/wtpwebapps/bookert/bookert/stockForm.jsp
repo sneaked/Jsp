@@ -10,26 +10,28 @@
 <link rel="stylesheet" type="text/css" href="style/default.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+function stock(){
+	if(document.stockform.name.value==""||document.stockform.book_num.value==""||document.stockform.ea.value==""){
+		alert("책 정보 검색");
+	}else{
+		document.stockform.submit();
+	}
+}
+</script>
 </head>
 <body>
-<%
-	if(request.getAttribute("alert")!=null){
-		%>
-		<script type="text/javascript">
-		alert("제목을 검색하세요");
-		</script>
-		<%
-	}
-%>
 <a href="managerForm.jsp">관리자 화면</a>
 <h1 align="center">재고관리</h1>
-<form action="searchForm.jsp?page=stock" method="post">
+<form action="searchForm.jsp?page=stock" method="post" name="searchform">
 <table>
 	<tr>
 		<td>책 검색</td>
 	</tr>
 	<tr>
-		<td>제목</td><td><input type="text" name="name" autofocus="autofocus"></td><td><input type="submit" value="검색"></td>
+		<td>제목</td><td><input type="text" name="name" autofocus="autofocus"></td>
+		<td><input type="submit" value="검색"></td>
 	</tr>
 </table>
 </form>
@@ -44,7 +46,7 @@
 			name = "";
 		}
 	%>
-<form action="stockPro.jsp" method="post">
+<form action="stockPro.jsp" method="post" name="stockform">
 <table>
 	<tr>
 		<td colspan="3">책 입고 화면</td>
@@ -59,7 +61,7 @@
 		<td>수량</td><td colspan="2"><input type="text" name="ea"></td>
 	</tr>
 	<tr>
-		<td colspan="3"><input type="submit" value="등록"></td>
+		<td colspan="3"><input type="button" value="등록" onclick="javascript:stock()"></td>
 	</tr>
 </table>
 </form>
