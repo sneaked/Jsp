@@ -248,8 +248,6 @@ public class BookertDBBean {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
-				
-				
 			
 				sql = "select * from book_stock where book_num=?";
 				pstmt = conn.prepareStatement(sql);

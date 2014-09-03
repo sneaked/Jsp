@@ -247,9 +247,10 @@ public class BookertDBBean {
 			pstmt.setInt(1, book.getBook_num());
 			rs = pstmt.executeQuery();
 			
+			int rsnum = rs.getInt("book_num");
+			String rsname = rs.getString("name");
+			
 			if(rs.next()){
-				
-				
 			
 				sql = "select * from book_stock where book_num=?";
 				pstmt = conn.prepareStatement(sql);
