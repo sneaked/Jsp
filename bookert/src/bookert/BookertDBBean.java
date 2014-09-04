@@ -232,49 +232,33 @@ public class BookertDBBean {
 	}
 	
 	//책 입고 기능
-	public int bookStock(BookstockBean book){
+	public void bookStock(BookstockBean book){
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = null;
-		int x = 0;
 		try{
 			conn = getConnection();
-			
-			sql = "select book_num,name from book_info where book_num=?";
+			String sql = "select * from book_stock where book_num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, book.getBook_num());
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
-				
-				
-			
-				sql = "select * from book_stock where book_num=?";
+				sql = "update book_stock set ea=?,stock_date=? where book_num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, book.getEa()+rs.getInt("ea"));
+				pstmt.setTimestamp(2, book.getStock_date());
+				pstmt.setInt(3, rs.getInt("book_num"));
+				pstmt.executeUpdate();
+			}else{
+				sql = "insert into book_stock values (?,?,?,?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, book.getBook_num());
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()){
-					sql = "update book_stock set ea=?,stock_date=? where book_num=?";
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setInt(1, book.getEa()+rs.getInt("ea"));
-					pstmt.setTimestamp(2, book.getStock_date());
-					pstmt.setInt(3, rs.getInt("book_num"));
-					pstmt.executeUpdate();
-				}else{
-					sql = "insert into book_stock values (?,?,?,?)";
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setInt(1, book.getBook_num());
-					pstmt.setString(2, book.getName());
-					pstmt.setInt(3, book.getEa());
-					pstmt.setTimestamp(4, book.getStock_date());
-					pstmt.executeUpdate();
-				}
-				x = 1;
-			}else{
-				x = -1;
+				pstmt.setString(2, book.getName());
+				pstmt.setInt(3, book.getEa());
+				pstmt.setTimestamp(4, book.getStock_date());
+				pstmt.executeUpdate();
 			}
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -286,7 +270,6 @@ public class BookertDBBean {
 			if(conn!=null)
 				try{conn.close();}catch(Exception e){}
 		}
-		return x;
 	}
 	//책 재고 검색기능
 	public List<BookstockBean> bookStockList(String column,String sort){
@@ -335,4 +318,92 @@ public class BookertDBBean {
 		
 		return result;
 	}
+	
+	//회원 검색 기능
+	public List<MemberBean> memberList(String column,String sort){
+		List<MemberBean> result = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		
+		try{
+			conn = getConnection();
+			
+			
+			if(column.equals("")){
+				sql = "select * from member order by member_num desc";
+			}else{
+				sql = "select * from member order by ";
+				if(sort.equals("1")){
+					sql += column+" desc";
+				}else{
+					sql += column+" asc";
+				}
+			}
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				result = new ArrayList<MemberBean>();
+				do{
+					MemberBean member = new MemberBean();
+					member.setMember_num(rs.getInt("member_num"));
+					member.setName(rs.getString("name"));
+					member.setId(rs.getString("id"));
+					member.setPasswd(rs.getString("passwd"));
+					member.setHp(rs.getString("hp"));
+					member.setAddress(rs.getString("address"));
+					member.setReg_date(rs.getTimestamp("reg_date"));
+					result.add(member);
+				}while(rs.next());
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(rs!=null)try{rs.close();}catch(Exception e){}
+			if(pstmt!=null)try{pstmt.close();}catch(Exception e){}
+			if(conn!=null)try{conn.close();}catch(Exception e){}
+		}
+		return result;
+	}
+	
+	//장바구니 검색기능
+	public List<CartBean> orderList(int member_num){
+		List<CartBean> result = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		
+		try{
+			conn = getConnection();
+			sql = "select * from cart where member_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, member_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				result = new ArrayList<CartBean>();
+				do{
+					CartBean cart = new CartBean();
+					cart.setCart_num(rs.getInt("cart_num"));
+					cart.setMember_num(rs.getInt("member_num"));
+					cart.setBook_num(rs.getInt("book_num"));
+					cart.setName(rs.getString("name"));
+					cart.setPrice(rs.getInt("price"));
+					cart.setEa(rs.getInt("ea"));
+					result.add(cart);
+				}while(rs.next());
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(rs!=null)try{rs.close();}catch(Exception e){}
+			if(pstmt!=null)try{pstmt.close();}catch(Exception e){}
+			if(conn!=null)try{conn.close();}catch(Exception e){}
+		}
+		return result;
+	}
+	
 }

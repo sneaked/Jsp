@@ -37,10 +37,12 @@ nav
 			<td>아이디 :</td><td> <input type="text" name="id" size="12" maxlength="50"></td>
 		</tr>
 		<tr>
-			<td>비밀번호 :</td><td><input type="password" name="passwd" size="13" maxlength="16"></td>
+			<td>비밀번호 :</td><td><input type="password" name="passwd" size="13" maxlength="16"
+			onkeydown="javascript: if (event.keyCode == 13) {login();}"></td>
 		</tr>
 		<tr>
-			<td align="center"><a href="#" onclick="javascript:login()">로그인</a></td><td align="center"><a href="memberJoinForm.jsp">회원가입</a></td>
+			<td align="center"><a href="#" onclick="javascript:login()">로그인</a></td>
+			<td align="center"><a href="memberJoinForm.jsp">회원가입</a></td>
 		</tr>
 		</table>
 		</form>

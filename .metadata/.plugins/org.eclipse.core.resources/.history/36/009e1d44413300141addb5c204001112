@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*,bookert.*" %>
+<%request.setCharacterEncoding("utf-8");%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="style/default.css">
+</head>
+<body>
+<h1 align="center">회원관리</h1>
+<table>
+	<tr>
+		<td>회원번호</td><td>이름</td><td>아이디</td><td>비밀번호</td><td>연락처</td><td>주소</td><td>가입일</td>
+	</tr>
+	<%
+	BookertDBBean bookert = BookertDBBean.getInstance();
+	List<MemberBean> result = bookert.memberList();
+	
+	for(int i=0;i<result.size();i++){
+		
+	
+	%>
+</table>
+</body>
+</html>

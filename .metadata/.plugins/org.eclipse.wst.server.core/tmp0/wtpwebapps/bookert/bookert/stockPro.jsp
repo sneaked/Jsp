@@ -13,6 +13,7 @@
 <body>
 <%
 	
+	try{
 		BookstockBean book = new BookstockBean();
 		book.setBook_num(Integer.parseInt(request.getParameter("book_num")));
 		book.setName(request.getParameter("name"));
@@ -20,16 +21,15 @@
 		book.setStock_date(new Timestamp(System.currentTimeMillis()));
 		
 		BookertDBBean bookert = BookertDBBean.getInstance();
-		int x = bookert.bookStock(book);
-		
-		if(x==-1){	
+		bookert.bookStock(book);
+	}catch(Exception e){
+		request.setAttribute("alert", "1");
+	}
 %>
-		<script type="text/javascript">
-			alert("등록되어 있지 않은 책입니다.");
-			location.href("stockForm.jsp");
-		</script>
-		<%}else{%>
-		<jsp:forward page="stockForm.jsp"></jsp:forward>
-		<%}%>
+<jsp:forward page="stockForm.jsp">
+	<jsp:param value="" name="name"/>
+	<jsp:param value="" name="ea"/>
+	<jsp:param value="" name="book_num"/>
+</jsp:forward>
 </body>
 </html>

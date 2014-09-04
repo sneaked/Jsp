@@ -19,7 +19,7 @@ td {text-align: center;};
 		<td><a href="#">주문 관리</a></td><td><a href="stockForm.jsp">재고 관리</a></td>
 	</tr>
 	<tr>
-		<td><a href="#">회원 관리</a></td><td><a href="infoForm.jsp">책 정보 관리</a></td>
+		<td><a href="memberManageForm.jsp">회원 관리</a></td><td><a href="infoForm.jsp">책 정보 관리</a></td>
 	</tr>
 </table>
 </body>

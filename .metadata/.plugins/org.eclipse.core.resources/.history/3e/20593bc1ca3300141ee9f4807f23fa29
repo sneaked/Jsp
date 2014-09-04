@@ -1,0 +1,5 @@
+package bookert;
+
+public class CartBean {
+
+}

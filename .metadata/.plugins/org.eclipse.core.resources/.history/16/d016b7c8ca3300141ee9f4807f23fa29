@@ -1,0 +1,13 @@
+package bookert;
+
+public class CartBean {
+	private int cart_num;
+	private int member_num;
+	private int book_num;
+	private String name;
+	private int price;
+	private int ea;
+	
+	
+	
+}
