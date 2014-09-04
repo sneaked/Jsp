@@ -10,6 +10,7 @@
 <body>
 <%
 	session.removeAttribute("loginId");
+	session.removeAttribute("loginMember_num");
 %>
 	<script type="text/javascript">
 		alert("로그아웃 되었습니다.");

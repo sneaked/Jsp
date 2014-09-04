@@ -52,3 +52,15 @@ a {
 	text-align:center;
 	height: 100px;
 }
+#buy{
+   font-size: 15pt;
+}
+
+#cart{
+   font-size: 15pt;
+}
+
+#order{
+   text-align: center;
+   width: 110px;
+}

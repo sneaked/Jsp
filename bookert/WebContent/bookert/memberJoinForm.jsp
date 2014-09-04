@@ -29,7 +29,8 @@ function idCheck(){
 	if(inputid==""){
 		alert("입력된 아이디가 없습니다");
 	}else{
-		window.open("checkIdPro.jsp?id="+inputid,"idchk", "width=400 height=150");
+		window.open("checkIdPro.jsp?id="+inputid,"idchk", 
+				"width=200,height=150,top="+((screen.height-200)/2)+",left="+((screen.width-150)/2));
 	}
 	
 }

@@ -12,7 +12,7 @@
 </head>
 <body>
 <%
-	String id = request.getParameter("id");
+	String id = request.getParameter("id").trim();
 	String passwd = request.getParameter("passwd");
 	
 	BookertDBBean bookert = BookertDBBean.getInstance();
@@ -36,6 +36,8 @@
 		break;
 	case 1:
 		session.setAttribute("loginId", id);
+		int member_num = bookert.getMember_num(id);
+		session.setAttribute("loginMember_num", member_num);
 		%>
 		<script type="text/javascript">
 		alert("로그인 되었습니다");

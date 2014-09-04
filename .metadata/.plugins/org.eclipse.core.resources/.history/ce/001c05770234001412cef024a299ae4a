@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="bookert.*,java.util.*"%>    
+<%request.setCharacterEncoding("utf-8");%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+	BookertDBBean bookert = BookertDBBean.getInstance();
+	int mode = Integer.parseInt(request.getParameter("mode"));
+	int cart_num = Integer.parseInt(request.getParameter("cart_num"));
+	int ea = Integer.parseInt(request.getParameter("ea"));
+	bookert.updateCartea(cart_num, ea , mode);
+%>	
+
+</body>
+</html>

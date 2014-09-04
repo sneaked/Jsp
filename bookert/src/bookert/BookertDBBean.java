@@ -119,7 +119,7 @@ public class BookertDBBean {
 		int x = 0;//아이디 불일치
 		try{
 			conn = getConnection();
-			sql = "select id,passwd from member where id=?";
+			sql = "select member_num,id,passwd from member where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -147,6 +147,37 @@ public class BookertDBBean {
 		return x;
  	}
 	
+ 	//회원번호 검색기능
+ 	public int getMember_num(String id){
+ 		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		int x = 0;
+		try{
+			conn = getConnection();
+			sql = "select member_num from member where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				x = rs.getInt("member_num");
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(rs!=null)
+				try{rs.close();}catch(Exception e){}
+			if(pstmt!=null)
+				try{pstmt.close();}catch(Exception e){}
+			if(conn!=null)
+				try{conn.close();}catch(Exception e){}
+		}
+		return x;
+ 	}
+ 	
 	//책 정보 입력 기능
 	public void bookInfo(BookinfoBean info){
 		Connection conn = null;
@@ -329,8 +360,6 @@ public class BookertDBBean {
 		
 		try{
 			conn = getConnection();
-			
-			
 			if(column.equals("")){
 				sql = "select * from member order by member_num desc";
 			}else{
@@ -368,8 +397,71 @@ public class BookertDBBean {
 		return result;
 	}
 	
+	//장바구니 담기
+	public void addCart(String id,int book_num){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		ResultSet rs = null;
+		
+		String name =null;
+		int member_num=0,price=0;
+		try{
+			conn = getConnection();
+			sql = "select member_num from member where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+				member_num = rs.getInt("member_num");
+			
+			sql = "select name,price from book_info where book_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, book_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				name = rs.getString("name");
+				price = rs.getInt("price");
+			}
+			
+			sql = "select * from cart where member_num=? and book_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, member_num);
+			pstmt.setInt(2, book_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				sql = "update cart set ea=?,price=? where member_num=? and book_num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, rs.getInt("ea")+1);
+				pstmt.setInt(2, rs.getInt("price")+price);
+				pstmt.setInt(3, member_num);
+				pstmt.setInt(4, book_num);
+				pstmt.executeUpdate();
+			}else{
+				sql = "insert into cart (member_num,book_num,name,price,ea) values(?,?,?,?,?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, member_num);
+				pstmt.setInt(2, book_num);
+				pstmt.setString(3, name);
+				pstmt.setInt(4, price);
+				pstmt.setInt(5, 1);
+				pstmt.executeUpdate();
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(rs!=null)try{rs.close();}catch(Exception e){}
+			if(pstmt!=null)try{pstmt.close();}catch(Exception e){}
+			if(conn!=null)try{conn.close();}catch(Exception e){}
+		}
+	}
+	
 	//장바구니 검색기능
-	public List<CartBean> orderList(int member_num){
+	public List<CartBean> cartList(int member_num){
 		List<CartBean> result = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -378,7 +470,7 @@ public class BookertDBBean {
 		
 		try{
 			conn = getConnection();
-			sql = "select * from cart where member_num=?";
+			sql = "select * from cart where member_num=? order by cart_num desc";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, member_num);
 			rs = pstmt.executeQuery();
@@ -405,5 +497,39 @@ public class BookertDBBean {
 		}
 		return result;
 	}
+	
+	//장바구니 수량변경&삭제
+	public void updateCartea(int cart_num,int ea,int mode){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try{
+			conn = getConnection();
+			
+			switch(mode){
+			case -1:
+				sql = "delete from cart where cart_num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, cart_num);
+				pstmt.executeUpdate();
+				break;
+			case 1:
+				sql = "update cart set ea=? where cart_num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, ea);
+				pstmt.setInt(2, cart_num);
+				pstmt.executeUpdate();
+				break;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(pstmt!=null)try{pstmt.close();}catch(Exception e){}
+			if(conn!=null)try{conn.close();}catch(Exception e){}
+		}
+	}
+	
+	
 	
 }

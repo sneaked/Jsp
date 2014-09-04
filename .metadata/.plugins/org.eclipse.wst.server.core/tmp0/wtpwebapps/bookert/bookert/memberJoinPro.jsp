@@ -14,7 +14,7 @@
 <script type="text/javascript">
 function joinOk(){
 	alert("회원 가입을 축하합니다.\n메인화면으로 이동합니다");
-	location.href("main.jsp");
+	location.href("index.jsp");
 }	
 
 </script>
