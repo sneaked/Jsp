@@ -16,7 +16,7 @@
 	String passwd = request.getParameter("passwd");
 	
 	BookertDBBean bookert = BookertDBBean.getInstance();
-	int x = bookert.member_Check(id, passwd);
+	int x = bookert.memberCheck(id, passwd);
 	switch(x){
 	case 0:
 		%>

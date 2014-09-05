@@ -28,6 +28,13 @@ function cart(book_num){
 function cartList(){
 	location.href("cartListForm.jsp");
 }
+function buy(book_num,name,price){
+	if(confirm("구매하시겠습니까?")){
+		location.href("buyForm.jsp?book_num="+book_num+"&name="+name+"&ea=1&price="+price);
+	}else{
+		return;
+	}
+}
 </script>
 </head>
 <body>
@@ -105,6 +112,8 @@ nav
 	      for (int i = index; i <= maxindex; i++) {
 	         if(i<booklist.size()){
 	        	 int book_num = booklist.get(i).getBook_num();
+	        	 String name = booklist.get(i).getName();
+	        	 int price = booklist.get(i).getPrice();
 	   %>
 	
 		<table border="1" width="785px">
@@ -117,8 +126,8 @@ nav
 			<tr>
 				<td>제목: <%=booklist.get(i).getName()%></td>
 				<td rowspan="3" id="order">
-				<a href="#" onclick="javascript:cart(<%=book_num%>)">장바구니 담기</a><br><br> 
-				<a href="#" onclick="javascript:buy(<%=book_num%>)">구매하기</a>
+				<a href="#" onclick="javascript:cart('<%=book_num%>')">장바구니 담기</a><br><br> 
+				<a href="#" onclick="javascript:buy('<%=book_num%>','<%=name%>','<%=price%>')">구매하기</a>
 				</td>
 			</tr>
 			<tr>

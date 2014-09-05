@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="bookert.*,java.util.*"%>
+<%request.setCharacterEncoding("utf-8");%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="style/default.css">
+</head>
+<body>
+<h2 align="center">주문정보 입력</h2>
+<form action="" method="post">
+<table border="1" width="785px" align="center" style="text-align:center;">
+	<tr>
+		<td width="80px"><img src="book_image/1.jpg" style="width: 80px; height: 110px;"></td>
+		<td>제목</td>
+		<td width="8%">수량</td>
+		<td width="8%"><input type="number" name="ea" value="1" maxlength="2" size="2" max="99"></td>
+		<td width="8%"><input type="button" value="수정"></td>
+		<td width="8%">가격</td>
+	</tr>
+</table>
+</form>
+<form action="" method="post">
+<table>
+
+
+</table>
+</form>
+</body>
+</html>

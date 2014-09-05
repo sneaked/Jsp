@@ -1635,3 +1635,15 @@
 0:0:0:0:0:0:0:1 - - [04/Sep/2014:16:57:28 +0900] "GET /bookert/bookert/index.jsp HTTP/1.1" 200 6216
 0:0:0:0:0:0:0:1 - - [04/Sep/2014:16:57:46 +0900] "GET /bookert/bookert/memberJoinForm.jsp HTTP/1.1" 200 2782
 0:0:0:0:0:0:0:1 - - [04/Sep/2014:16:58:04 +0900] "GET /bookert/bookert/checkIdPro.jsp?id=666 HTTP/1.1" 200 350
+127.0.0.1 - - [04/Sep/2014:17:10:50 +0900] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [04/Sep/2014:17:10:53 +0900] "GET /bookert/bookert/index.jsp HTTP/1.1" 200 6216
+0:0:0:0:0:0:0:1 - - [04/Sep/2014:17:10:59 +0900] "POST /bookert/bookert/loginPro.jsp HTTP/1.1" 200 329
+0:0:0:0:0:0:0:1 - - [04/Sep/2014:17:11:00 +0900] "GET /bookert/bookert/index.jsp HTTP/1.1" 200 6216
+0:0:0:0:0:0:0:1 - - [04/Sep/2014:17:11:05 +0900] "POST /bookert/bookert/loginPro.jsp HTTP/1.1" 200 326
+0:0:0:0:0:0:0:1 - - [04/Sep/2014:17:11:05 +0900] "GET /bookert/bookert/index.jsp HTTP/1.1" 200 5906
+0:0:0:0:0:0:0:1 - - [04/Sep/2014:17:11:06 +0900] "GET /bookert/bookert/cartListForm.jsp HTTP/1.1" 200 3112
+0:0:0:0:0:0:0:1 - - [04/Sep/2014:17:11:13 +0900] "GET /bookert/bookert/cartUpdatePro.jsp?cart_num=3&ea=2&mode=-1 HTTP/1.1" 200 2365
+0:0:0:0:0:0:0:1 - - [04/Sep/2014:17:11:15 +0900] "GET /bookert/bookert/cartUpdatePro.jsp?cart_num=1&ea=3&mode=-1 HTTP/1.1" 200 1618
+0:0:0:0:0:0:0:1 - - [04/Sep/2014:17:11:15 +0900] "GET /bookert/bookert/index.jsp HTTP/1.1" 200 5906
+0:0:0:0:0:0:0:1 - - [04/Sep/2014:17:11:18 +0900] "GET /bookert/bookert/logoutPro.jsp HTTP/1.1" 200 252
+0:0:0:0:0:0:0:1 - - [04/Sep/2014:17:11:19 +0900] "GET /bookert/bookert/index.jsp HTTP/1.1" 200 6216
